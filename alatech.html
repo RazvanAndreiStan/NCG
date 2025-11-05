@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vino să lucrezi cu noi! - Nouveau Construct Junior</title>
+
+  <!-- Font + CSS comun -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+  <!-- Buton hamburger (mobil) -->
+  <button class="menu-toggle" aria-label="Deschide/închide meniul" aria-expanded="false" aria-controls="nav-principal">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <nav id="nav-principal">
+    <ul>
+      <li><a href="index.html">Pagina principală</a></li>
+      <li><a href="index.html#despre-noi">Despre noi</a></li>
+      <li><a href="alatech.html">Alătură-te echipei!</a></li>
+      <li><a href="galerie.html">Galerie de imagini</a></li>
+      <li><a href="oferte.html">Oferte și prețuri</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+</aside>
+
+
+  <!-- CONȚINUT PRINCIPAL -->
+  <main>
+    <h1>Vino să lucrezi cu noi!</h1>
+
+    <!-- GALERIE ANUNȚURI -->
+    <div class="galerie-anunturi">
+      <img src="anunturi/anunt1.jpg" alt="Anunț 1" onclick="deschideImagine(this)">
+      <img src="anunturi/anunt2.jpg" alt="Anunț 2" onclick="deschideImagine(this)">
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="lightbox" onclick="inchideImagine()">
+      <img id="imagineMare" src="" alt="Imagine mărită">
+    </div>
+
+    <!-- SECȚIUNE CONTACT RAPIDĂ -->
+    <section class="sectiune-contact-rapida">
+      <h3>Vrei să te alături echipei?</h3>
+      <p>Contactați-ne acum pentru mai multe detalii!</p>
+      <a href="index.html#contact" class="btn-contact">Contactează-ne!</a>
+    </section>
+
+    <!-- BUTON ÎNAPOI -->
+    <a href="index.html" class="back-btn">← Înapoi la pagina principală</a>
+
+  </main>
+
+  <!-- FOOTER (mutat în afara mainului) -->
+  <footer>
+    <p>© 2025 Nouveau Construct Junior. Toate drepturile rezervate.</p>
+    <small>Creat cu ❤️ pentru NCJ</small>
+  </footer>
+
+  <!-- SCRIPT LIGHTBOX -->
+  <script>
+    function deschideImagine(img) {
+      const lightbox = document.getElementById("lightbox");
+      const imagineMare = document.getElementById("imagineMare");
+      imagineMare.src = img.src;
+      lightbox.style.display = "flex";
+    }
+
+    function inchideImagine() {
+      document.getElementById("lightbox").style.display = "none";
+    }
+  </script>
+
+<script>
+  (function() {
+    const toggleBtn = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const body = document.body;
+
+    if (!toggleBtn || !sidebar) return;
+
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = sidebar.classList.toggle('open');
+      body.classList.toggle('menu-open', isOpen);
+      toggleBtn.classList.toggle('open', isOpen);
+      toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Închide meniul dacă utilizatorul apasă pe un link din sidebar (opțional, recomandat)
+    sidebar.addEventListener('click', (e) => {
+      if (e.target.tagName.toLowerCase() === 'a') {
+        sidebar.classList.remove('open');
+        body.classList.remove('menu-open');
+        toggleBtn.classList.remove('open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+</script>
+
+
+</body>
+</html>

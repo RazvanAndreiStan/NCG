@@ -417,7 +417,7 @@ table th {
 
 /* când e deschis, containerul devine vizibil */
 .extra-images.open {
-  max-height: 6000px;   /* suficient de mare ca să încapă toate imaginile */
+  max-height: 7000px;   /* suficient de mare ca să încapă toate imaginile */
   opacity: 1;
   transform: translateY(0);
   margin-top: 20px;

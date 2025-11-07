@@ -864,57 +864,52 @@ body.menu-open::after {
   }
 
   
-  /* === Corecții de aliniere pentru secțiunea Contact pe mobil === */
+    /* === Compactare secțiune Contact pe mobil === */
   .contact-section {
-    text-align: center;
+    padding: 40px 20px; /* mai puțin spațiu sus/jos */
   }
 
   .contact-box {
     margin: 0 auto;
-    text-align: left;
+    max-width: 400px;
+    padding: 20px 18px; /* mai compact în interior */
   }
 
   .contact-item {
+    margin-bottom: 10px; /* micșorează spațiul dintre elemente */
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
   }
 
   .contact-item .icon {
-    flex: 0 0 28px;
-    text-align: center;
+    flex-shrink: 0;
+    font-size: 20px;
   }
 
-  .contact-item span,
-  .contact-item a,
   .contact-item strong {
-    flex: 1 1 auto;
+    margin-right: 6px;
+  }
+
+  .contact-item a,
+  .contact-item span {
+    line-height: 1.4;
     word-break: break-word;
-    line-height: 1.5;
   }
 
-  /* Emailul — împiedică ruperea urâtă a textului */
+  /* emailul se aliniază frumos fără a ocupa 3 rânduri */
   .contact-item a[href^="mailto"] {
-    display: inline-block;
     overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
-  /* Social media: centrate și cu spațiu constant */
+  /* Social media icons mai apropiate */
   .contact-item.social {
     justify-content: center;
-    gap: 14px;
-    margin-top: 20px;
+    gap: 12px;
+    margin-top: 10px;
   }
 
-  .contact-item.social .social-icon {
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 
 
 

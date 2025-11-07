@@ -864,18 +864,92 @@ body.menu-open::after {
   }
 
   /* === Contact === */
-  .contact-box {
-    max-width: 90%;
-    margin: 0 auto;
-    word-wrap: break-word;
-    overflow-wrap: anywhere;
-    padding: 25px 15px;
-  }
+  /* === Contact (versiune compactă, gen HERO) === */
+.contact-section {
+  background-color: #f7bcbc; 
+  color: #fff;
+  padding: 50px 25px;
+  text-align: center;
+  border-radius: 12px;
+  margin-top: 40px;
+}
 
-  .contact-item a {
-    word-break: break-word;
-    display: inline-block;
-  }
+.contact-section h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.contact-section p {
+  font-size: 16px;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+.contact-box {
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 25px 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.contact-item .icon {
+  font-size: 20px;
+  width: 28px;
+  color: #fff;
+}
+
+.contact-item strong {
+  color: #fff;
+  font-weight: 600;
+  margin-right: 6px;
+  white-space: nowrap;
+}
+
+.contact-item a {
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.contact-item a:hover {
+  text-decoration: underline;
+}
+
+.contact-item.social {
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.contact-item.social .social-icon {
+  font-size: 22px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 8px;
+  background: #fff;
+  color: #f7bcbc;
+  transition: transform 0.3s ease;
+}
+
+.contact-item.social .social-icon:hover {
+  transform: translateY(-3px);
+}
+
 
   /* === Footer === */
   footer {

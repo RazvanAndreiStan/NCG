@@ -688,43 +688,7 @@ footer small {
   section { padding: 60px 30px; }
 }
 
-@media (max-width: 768px) {
-  /* Sidebar devine bară sus */
-  .sidebar {
-    position: relative;
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    padding: 12px 16px;
-    justify-content: center;
-    align-items: center;
-  }
-  .sidebar nav ul {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .sidebar nav ul li { margin: 8px 0; }
 
-  /* Conținutul se lărgește pe toată lățimea */
-  main { margin: 0; padding: 20px; }
-
-  /* About vertical */
-  .about { flex-direction: column; }
-
-  /* Slideshow mai compact */
-  .slideshow-container { height: 360px; }
-
-  /* Galerie carduri mai mari pe lățimea mică */
-  .gallery {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
-  .galerie-anunturi img { width: 100%; max-width: 320px; }
-
-  /* Titluri mai compacte la contact */
-  .contact-section h2 { font-size: 28px; }
-}
 
 /* ======== Buton hamburger (desktop ascuns) ======== */
 .menu-toggle {
@@ -750,57 +714,61 @@ footer small {
 }
 
 /* ======== Mobil: sidebar glisant + animație ☰ -> ✖ ======== */
+/* ======== Fix complet pentru zoom/afisare hamburger pe mobil ======== */
 @media (max-width: 768px) {
-  /* Butonul devine vizibil pe mobil */
-  .menu-toggle { display: block; }
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden; /* previne derularea orizontală */
+  }
 
-  /* Sidebar glisant din stânga, ascuns implicit */
-  .sidebar {
+  main {
+    margin: 0;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* asigură-te că butonul e mereu vizibil */
+  .menu-toggle {
+    display: block !important;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 220px;
-    height: 100vh;
-    background: var(--accent);
-    transform: translateX(-100%);
-    transition: transform 0.35s ease-in-out;
-    z-index: 9998;
-    padding-top: 60px; /* spațiu sus ca să nu lovească butonul */
+    top: 15px;
+    right: 15px;
+    z-index: 10000;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 6px;
+    padding: 6px;
   }
 
-  /* Când este deschis */
-  .sidebar.open { transform: translateX(0); }
-
-  /* Link-urile în coloană (siguranță – probabil ai deja pe mobil) */
-  .sidebar nav ul {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  .menu-toggle .bar {
+    background-color: var(--accent);
   }
 
-  /* Împiedică scrollul paginii când meniul e deschis */
-  body.menu-open { overflow: hidden; }
-
-  /* Animația hamburger -> X */
-  .menu-toggle.open .bar:nth-child(1) { transform: rotate(45deg) translateY(8px); }
-  .menu-toggle.open .bar:nth-child(2) { opacity: 0; }
-  .menu-toggle.open .bar:nth-child(3) { transform: rotate(-45deg) translateY(-8px); }
-
-  /* Conținutul principal pe mobil (ai deja asta, dar reconfirm): */
-  main { margin: 0; padding: 20px; } /* elimină margin-left de desktop */
-
-  body.menu-open::after {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.3);
-    backdrop-filter: blur(4px);
-    z-index: 9997;
-  }
-
-
+  /* sidebar-ul începe complet ascuns */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;
+  background: var(--accent);
+  padding-top: 60px;
+  z-index: 9998;
+  transform: translateX(-100%);
+  transition: transform 0.35s ease-in-out;
 }
+
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  body.menu-open {
+    overflow: hidden; /* blochează scrollul când meniul e deschis */
+  }
+}
+
 
 
 /* ========== Fin ========== */

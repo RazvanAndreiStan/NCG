@@ -864,7 +864,7 @@ body.menu-open::after {
   }
 
   
-  /* === Corecții de aliniere pentru secțiunea Contact pe mobil === */
+   /* === Fix aliniere perfectă pentru Contact pe mobil === */
   .contact-section {
     text-align: center;
   }
@@ -872,40 +872,45 @@ body.menu-open::after {
   .contact-box {
     margin: 0 auto;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
   }
 
   .contact-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: nowrap;
     justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 8px;
   }
 
   .contact-item .icon {
-    flex: 0 0 28px;
+    flex: 0 0 26px;
     text-align: center;
+    margin-top: 2px;
   }
 
   .contact-item span,
-  .contact-item a,
-  .contact-item strong {
-    flex: 1 1 auto;
-    word-break: break-word;
+  .contact-item strong,
+  .contact-item a {
+    flex: 1;
     line-height: 1.5;
+    word-break: break-word;
+    white-space: normal;
   }
 
-  /* Emailul — împiedică ruperea urâtă a textului */
+  /* Previne ruperea emailului pe două rânduri forțate */
   .contact-item a[href^="mailto"] {
-    display: inline-block;
     overflow-wrap: anywhere;
   }
 
-  /* Social media: centrate și cu spațiu constant */
+  /* Social icons centrate frumos */
   .contact-item.social {
     justify-content: center;
-    gap: 14px;
     margin-top: 20px;
+    gap: 16px;
   }
 
   .contact-item.social .social-icon {
@@ -915,6 +920,7 @@ body.menu-open::after {
     align-items: center;
     justify-content: center;
   }
+
 
 
 

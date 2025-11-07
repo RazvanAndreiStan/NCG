@@ -864,6 +864,57 @@ body.menu-open::after {
   }
 
   
+  /* === Corecții de aliniere pentru secțiunea Contact pe mobil === */
+  .contact-section {
+    text-align: center;
+  }
+
+  .contact-box {
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .contact-item .icon {
+    flex: 0 0 28px;
+    text-align: center;
+  }
+
+  .contact-item span,
+  .contact-item a,
+  .contact-item strong {
+    flex: 1 1 auto;
+    word-break: break-word;
+    line-height: 1.5;
+  }
+
+  /* Emailul — împiedică ruperea urâtă a textului */
+  .contact-item a[href^="mailto"] {
+    display: inline-block;
+    overflow-wrap: anywhere;
+  }
+
+  /* Social media: centrate și cu spațiu constant */
+  .contact-item.social {
+    justify-content: center;
+    gap: 14px;
+    margin-top: 20px;
+  }
+
+  .contact-item.social .social-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
 
 

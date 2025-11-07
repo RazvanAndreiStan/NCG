@@ -864,7 +864,7 @@ body.menu-open::after {
   }
 
   
-    /* === Compactare secțiune Contact pe mobil === */
+      /* === Compactare + aranjare verticală secțiune Contact pe mobil === */
   .contact-section {
     padding: 40px 20px; /* mai puțin spațiu sus/jos */
   }
@@ -878,22 +878,28 @@ body.menu-open::after {
   .contact-item {
     margin-bottom: 10px; /* micșorează spațiul dintre elemente */
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column; /* 🔹 textul (eticheta) deasupra conținutului */
+    align-items: flex-start;
+    gap: 4px;
   }
 
   .contact-item .icon {
     flex-shrink: 0;
     font-size: 20px;
+    margin-bottom: 4px;
   }
 
   .contact-item strong {
-    margin-right: 6px;
+    display: block;
+    font-size: 16px;
+    margin-bottom: 2px;
   }
 
   .contact-item a,
   .contact-item span {
-    line-height: 1.4;
+    display: block;
+    font-size: 15px;
+    line-height: 1.5;
     word-break: break-word;
   }
 
@@ -905,12 +911,12 @@ body.menu-open::after {
 
   /* Social media icons mai apropiate */
   .contact-item.social {
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
     gap: 12px;
     margin-top: 10px;
   }
-
-
 
 
   /* === Footer === */

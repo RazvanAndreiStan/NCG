@@ -866,7 +866,7 @@ body.menu-open::after {
   /* === Contact === */
   /* === Contact (versiune compactă, corect aliniată pe mobil) === */
 .contact-section {
-  background-color: #7a0f0f; 
+  background-color: #f7bcbc; 
   color: #fff;
   padding: 45px 20px;
   text-align: center;
@@ -947,7 +947,7 @@ body.menu-open::after {
   justify-content: center;
   margin: 0 6px;
   background: #fff;
-  color: #7a0f0f;
+  color: #f7bcbc;
   transition: transform 0.3s ease;
 }
 

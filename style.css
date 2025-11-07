@@ -795,6 +795,37 @@ body.menu-open::after {
   z-index: 9997;
 }
 
+/* ====== Optimizare HERO pentru mobil ====== */
+@media (max-width: 768px) {
+  .hero {
+    padding: 40px 20px; /* reduce spațiul vertical */
+  }
+
+  .hero h1 {
+    font-size: 30px; /* mai mic decât 45px */
+    margin-bottom: 8px;
+  }
+
+  .hero h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .hero p {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .hero-logo {
+    gap: 20px; /* mai puțin spațiu între logouri */
+    margin-top: 15px;
+  }
+
+  .hero-logo img {
+    width: 120px; /* mai mici pe mobil */
+  }
+}
+
 
 
 /* ========== Fin ========== */

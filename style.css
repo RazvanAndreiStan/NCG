@@ -826,6 +826,76 @@ body.menu-open::after {
   }
 }
 
+/* ====== Fix layout pe mobil (Despre noi + Contact + Footer) ====== */
+@media (max-width: 768px) {
+
+  /* === Despre noi === */
+  .about {
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .about-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .about-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .about-image img {
+    max-width: 90%;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .about-text {
+    width: 100%;
+  }
+
+  .about-text p {
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* === Contact === */
+  .contact-box {
+    max-width: 90%;
+    margin: 0 auto;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    padding: 25px 15px;
+  }
+
+  .contact-item a {
+    word-break: break-word;
+    display: inline-block;
+  }
+
+  /* === Footer === */
+  footer {
+    width: 100%;
+    margin: 0;
+    padding: 25px 15px;
+    text-align: center;
+    background: #1b1b1b; /* uniform cu restul site-ului */
+    color: #fff;
+    box-sizing: border-box;
+  }
+
+  footer p,
+  footer small {
+    margin: 6px 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
 
 
 /* ========== Fin ========== */

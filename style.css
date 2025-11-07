@@ -864,63 +864,67 @@ body.menu-open::after {
   }
 
   /* === Contact === */
-  /* === Contact (versiune compactă, gen HERO) === */
+  /* === Contact (versiune compactă, corect aliniată pe mobil) === */
 .contact-section {
-  background-color: #f7bcbc; 
+  background-color: #7a0f0f; 
   color: #fff;
-  padding: 50px 25px;
+  padding: 45px 20px;
   text-align: center;
   border-radius: 12px;
   margin-top: 40px;
 }
 
 .contact-section h2 {
-  font-size: 32px;
-  margin-bottom: 20px;
+  font-size: 30px;
+  margin-bottom: 15px;
   color: #fff;
 }
 
 .contact-section p {
-  font-size: 16px;
-  margin-bottom: 30px;
+  font-size: 15px;
+  margin-bottom: 25px;
   color: #fff;
+  line-height: 1.5;
 }
 
 .contact-box {
   background: rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 10px;
-  padding: 25px 20px;
-  max-width: 400px;
+  padding: 20px;
+  max-width: 90%;
   margin: 0 auto;
   text-align: left;
+  word-break: break-word; /* sparge textul doar când e nevoie */
+  overflow-wrap: anywhere;
 }
 
 .contact-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
-  margin-bottom: 15px;
-  gap: 10px;
+  margin-bottom: 14px;
+  gap: 8px;
+  flex-wrap: wrap; /* ✅ permite împachetarea textului */
 }
 
 .contact-item .icon {
   font-size: 20px;
-  width: 28px;
+  width: 24px;
+  flex-shrink: 0;
   color: #fff;
 }
 
 .contact-item strong {
   color: #fff;
   font-weight: 600;
-  margin-right: 6px;
-  white-space: nowrap;
+  margin-right: 4px;
 }
 
 .contact-item a {
   color: #fff;
   text-decoration: none;
-  white-space: nowrap;
+  word-break: break-word; /* ✅ dacă e email lung, se sparge corect */
 }
 
 .contact-item a:hover {
@@ -929,7 +933,8 @@ body.menu-open::after {
 
 .contact-item.social {
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 18px;
+  gap: 14px;
 }
 
 .contact-item.social .social-icon {
@@ -940,15 +945,16 @@ body.menu-open::after {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 0 8px;
+  margin: 0 6px;
   background: #fff;
-  color: #f7bcbc;
+  color: #7a0f0f;
   transition: transform 0.3s ease;
 }
 
 .contact-item.social .social-icon:hover {
   transform: translateY(-3px);
 }
+
 
 
   /* === Footer === */

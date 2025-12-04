@@ -166,8 +166,8 @@ p { line-height: 1.6; }
 
 /* ========== DESPRE NOI (index) ========== */
 .about {
-  background: #fff7f7;
-  padding: 60px 40px;
+  background: #fff5f5;
+  padding: 60px 25px;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   margin: 40px auto;
@@ -349,7 +349,7 @@ table th {
   max-width: 100%;
 }
 
-/* Liste de avantaje (oferte) — cu bullet personalizat */
+/* Liste de avantaje si observatii (pagina oferte) — cu bullet personalizat */
 .lista-avantaje {
   list-style: none;
   padding-left: 0;
@@ -374,6 +374,33 @@ table th {
   transition: transform 0.2s ease;
 }
 .lista-avantaje li:hover::before { transform: scale(1.4); }
+
+
+
+.lista-observatii {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 15px;
+}
+.lista-observatii li {
+  position: relative;
+  margin-bottom: 10px;
+  padding-left: 28px;
+  font-size: 16px;
+  color: #222;
+  line-height: 1.6;
+}
+.lista-observatii li::before {
+  content: "•";
+  color: var(--accent);
+  font-weight: bold;
+  position: absolute;
+  left: 0; top: 0;
+  font-size: 22px;
+  line-height: 1.2;
+  transition: transform 0.2s ease;
+}
+.lista-observatii li:hover::before { transform: scale(1.4); }
 
 /* ========== Galerie (grid) + zoom la hover (păstrat) ========== */
 .gallery {
@@ -835,13 +862,24 @@ body.menu-open::after {
   height: auto;
   aspect-ratio: 1 / 1;
 }
+
 }
 /* ====== Fix layout pe mobil (Contact + Footer) ====== */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
 
-  
+  .galerie-anunturi {
+    gap: 10px; 
+    padding: 0 10px;
+    justify-content: center;
+  }
 
-  
+  /* 2. Transformăm dimensiunea fixă (300px) în procent (48%) */
+  .galerie-anunturi img {
+    width: 45%;       /* Două imagini de 48% încap una lângă alta */
+    max-width: none;  /* Anulăm orice limită care le-ar putea bloca */
+    height: auto;     /* Păstrăm proporțiile corecte */
+  }
+
       /* === Compactare + aranjare verticală secțiune Contact pe mobil === */
   .contact-section {
     padding: 40px 20px;

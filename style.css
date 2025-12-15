@@ -190,7 +190,7 @@ p { line-height: 1.6; }
 
 .about-image img {
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
   border-radius: 16px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   margin-bottom: 20px;
@@ -422,7 +422,7 @@ table th {
 }
 
 /* Secțiuni galerie tematice (galerie.html) */
-.galerie-sectiune { margin-top: 60px; }
+.galerie-sectiune { margin-top: 30px; }
 .galerie-sectiune h2 {
   font-size: 26px;
   color: var(--accent);

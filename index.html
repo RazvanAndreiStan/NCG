@@ -13,13 +13,13 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<link rel="icon" type="image/png" href="https://nouveauconstructgroup.ro/logo/favicon.png" sizes="512x512">
-<link rel="apple-touch-icon" href="https://nouveauconstructgroup.ro/logo/favicon.png">
+<link rel="icon" type="image/png" href="https://nouveauconstructgroup.ro/logo/favicon.jpeg" sizes="512x512">
+<link rel="apple-touch-icon" href="https://nouveauconstructgroup.ro/logo/favicon.jpeg">
 
 <!-- Open Graph -->
 <meta property="og:title" content="Nouveau Construct Group">
 <meta property="og:description" content="Firme de construcții și renovări din Oradea, specializate în finisaje interioare și exterioare.">
-<meta property="og:image" content="https://nouveauconstructgroup.ro/logo/favicon.png">
+<meta property="og:image" content="https://nouveauconstructgroup.ro/logo/favicon.jpeg">
 <meta property="og:url" content="https://nouveauconstructgroup.ro">
 <meta property="og:type" content="website">
 
@@ -53,8 +53,8 @@
     <!-- HERO SECTION -->
     <section class="hero">
       <h1>Nouveau Construct Group</h1>
-      <h2>Transformăm ideile tale în realitate!</h2>
-      <p>Bine ați venit pe site-ul nostru! </p>
+      <h2>Firmă de construcții, renovări și finisaje în Oradea</h2>
+      <p>Transformăm ideile tale în realitate! </p>
 
       <div class="hero-logo">
         <img src="logo/logoncj-r.png" alt="Logo partener 1">
@@ -72,10 +72,47 @@
 
     <div class="about-text">
       <h2>Despre noi</h2>
-      <div class="about-image">
+      <!--<div class="about-image">
       <img src="anunturi/anunt12.jpeg" alt="Echipa noastră">
       
-    </div>
+    </div>-->
+
+      <div class="about-video-3d">
+        <div class="video-scene">
+          <button id="global-mute-btn" class="mute-btn">
+            <i class="fas fa-volume-mute"></i> Sunet Oprit
+          </button>
+          
+          <div class="video-carousel">
+            <div class="vid-panel pos-left" data-index="2" onclick="handlePanelClick(2)">
+              <video src="Video/Video  3.mp4" autoplay loop muted playsinline></video>
+            </div>
+            
+            <div class="vid-panel pos-center" data-index="0" onclick="handlePanelClick(0)">
+              <video src="Video/Video  1.mp4" autoplay loop muted playsinline></video>
+            </div>
+            
+            <div class="vid-panel pos-right" data-index="1" onclick="handlePanelClick(1)">
+              <video src="Video/Video  2.mp4" autoplay loop muted playsinline></video>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-dots">
+          <span class="dot active" onclick="moveCarousel(0)">1</span>
+          <span class="dot" onclick="moveCarousel(1)">2</span>
+          <span class="dot" onclick="moveCarousel(2)">3</span>
+        </div>
+
+        <div id="video-lightbox-overlay" class="video-lightbox">
+            <span class="close-lightbox" onclick="closeVideoLightbox()">&times;</span>
+            <video id="lightbox-video-player" controls playsinline></video>
+        </div>
+
+      </div>
+
+
+
     <div class="text-oferte">
       <p>Suntem un grup de firme de construcții și renovări cu sediul în Oradea, specializate în finisaje interioare și exterioare.
         Oferim servicii de calitate superioară și soluții personalizate, menite să transforme orice spațiu într-un loc confortabil și estetic plăcut.</p>
@@ -233,6 +270,124 @@
   })();
 </script>
 
+
+
+<script>
+  let currentCenter = 0;
+  let isMutedGlobal = true;
+
+  // Helper: găsește panoul după data-index (nu după poziția în DOM)
+  function getPanelByVideoIndex(videoIndex) {
+    return document.querySelector(`.vid-panel[data-index="${videoIndex}"]`);
+  }
+
+  // --- ROTIRE CARUSEL ---
+  function moveCarousel(videoIndex) {
+    if (currentCenter === videoIndex) return;
+
+    const dots = document.querySelectorAll('.carousel-dots .dot');
+    const leftVideoIndex  = (videoIndex === 0) ? 2 : videoIndex - 1;
+    const rightVideoIndex = (videoIndex === 2) ? 0 : videoIndex + 1;
+
+    document.querySelectorAll('.vid-panel').forEach(p =>
+      p.classList.remove('pos-center', 'pos-left', 'pos-right')
+    );
+
+    getPanelByVideoIndex(videoIndex).classList.add('pos-center');
+    getPanelByVideoIndex(leftVideoIndex).classList.add('pos-left');
+    getPanelByVideoIndex(rightVideoIndex).classList.add('pos-right');
+
+    dots.forEach(d => d.classList.remove('active'));
+    dots[videoIndex].classList.add('active');
+
+    currentCenter = videoIndex;
+    updateAudioState();
+  }
+
+  // --- CLICK PE PANOU ---
+  function handlePanelClick(videoIndex) {
+    if (currentCenter === videoIndex) {
+      // Panou central → deschidem lightbox-ul
+      const panel = getPanelByVideoIndex(videoIndex);
+      openVideoLightbox(panel.querySelector('video').src);
+    } else {
+      // Panou lateral → îl aducem în centru
+      moveCarousel(videoIndex);
+    }
+  }
+
+  // --- LIGHTBOX ---
+  function openVideoLightbox(videoSrc) {
+    const lightbox = document.getElementById('video-lightbox-overlay');
+    const lightboxVideo = document.getElementById('lightbox-video-player');
+
+    lightboxVideo.src = videoSrc;
+    lightbox.classList.add('active');
+    muteAllCarouselVideos();
+    lightboxVideo.muted = false;
+
+    // Fallback pentru iOS (poate bloca autoplay cu sunet)
+    lightboxVideo.play().catch(() => {
+      lightboxVideo.muted = true;
+      lightboxVideo.play();
+    });
+  }
+
+  function closeVideoLightbox() {
+    const lightbox = document.getElementById('video-lightbox-overlay');
+    const lightboxVideo = document.getElementById('lightbox-video-player');
+
+    lightbox.classList.remove('active');
+    lightboxVideo.pause();
+    lightboxVideo.src = '';
+    updateAudioState();
+  }
+
+  // --- AUDIO ---
+  function updateAudioState() {
+    document.querySelectorAll('.vid-panel').forEach(panel => {
+      const panelVideoIndex = parseInt(panel.dataset.index);
+      panel.querySelector('video').muted =
+        isMutedGlobal || panelVideoIndex !== currentCenter;
+    });
+  }
+
+  function muteAllCarouselVideos() {
+    document.querySelectorAll('.vid-panel video').forEach(v => v.muted = true);
+  }
+
+  // --- INIȚIALIZARE după ce DOM-ul e gata ---
+  document.addEventListener('DOMContentLoaded', () => {
+    // Închide lightbox la click pe fundal
+    const lightbox = document.getElementById('video-lightbox-overlay');
+    if (lightbox) {
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === this) closeVideoLightbox();
+      });
+    }
+
+    // Buton Mute/Unmute
+    const muteBtn = document.getElementById('global-mute-btn');
+    if (muteBtn) {
+      muteBtn.addEventListener('click', () => {
+        isMutedGlobal = !isMutedGlobal;
+        updateAudioState();
+
+        if (isMutedGlobal) {
+          muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i> Sunet Oprit';
+          muteBtn.style.background = 'rgba(0,0,0,0.6)';
+          muteBtn.style.color = '#fff';
+          muteBtn.style.borderColor = 'rgba(255,255,255,0.2)';
+        } else {
+          muteBtn.innerHTML = '<i class="fas fa-volume-up"></i> Sunet Pornit';
+          muteBtn.style.background = 'var(--accent)';
+          muteBtn.style.color = 'var(--dark)';
+          muteBtn.style.borderColor = 'var(--accent)';
+        }
+      });
+    }
+  });
+</script>
 
 </body>
 </html>

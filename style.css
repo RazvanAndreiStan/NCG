@@ -968,6 +968,200 @@ body.menu-open::after {
 
 }
 
+/* ========== VIDEO 3D HEXAGON (Despre Noi) ========== */
+.about-video-3d {
+  flex: 1;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px; 
+  margin: 0 auto 30px auto;
+}
 
+.video-scene {
+  width: 100%;
+  perspective: 1000px; /* Activează spațiul 3D */
+  position: relative;
+  height: 420px; /* Înălțimea adaptată pentru clipuri verticale */
+  margin-bottom: 20px;
+}
+
+/* Butonul Mute */
+.mute-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+.mute-btn:hover { background: rgba(0, 0, 0, 0.8); }
+
+.video-carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.vid-panel {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 230px; 
+  height: 400px;
+  margin-left: -115px; /* Centrează pe orizontală (jumătate din lățime) */
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease, z-index 0.6s;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  cursor: pointer;
+  background: #111;
+}
+
+.vid-panel video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none; /* Lasă click-ul să ajungă la containerul panoului */
+}
+
+/* --- Pozițiile 3D --- */
+
+/* Centru: Vine în față */
+.vid-panel.pos-center {
+  transform: translateX(0) translateZ(80px) rotateY(0deg);
+  z-index: 3;
+  opacity: 1;
+  cursor: zoom-in;
+}
+
+/* Stânga: Împins în stânga, în spate și rotit ca latura unui hexagon exterior */
+.vid-panel.pos-left {
+  transform: translateX(-65%) translateZ(-80px) rotateY(45deg);
+  z-index: 1;
+  opacity: 0.5;
+}
+
+/* Dreapta: Împins în dreapta, în spate și rotit invers */
+.vid-panel.pos-right {
+  transform: translateX(65%) translateZ(-80px) rotateY(-45deg);
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.vid-panel:not(.pos-center):hover {
+  opacity: 0.8; /* Se luminează ușor la hover */
+}
+
+/* --- Comutatorul 1, 2, 3 --- */
+.carousel-dots {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.carousel-dots .dot {
+  background: #ddd;
+  color: #333;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.carousel-dots .dot:hover {
+  background: #ccc;
+}
+
+.carousel-dots .dot.active {
+  background: var(--accent);
+  color: var(--dark);
+  box-shadow: 0 4px 12px rgba(245, 169, 169, 0.5);
+  transform: scale(1.1);
+}
+
+/* Adaptare pentru mobil (ecrane mici) */
+@media (max-width: 768px) {
+  .video-scene { height: 320px; }
+  .vid-panel {
+    width: 180px;
+    height: 310px;
+    margin-left: -90px;
+  }
+  .vid-panel.pos-left { transform: translateX(-55%) translateZ(-80px) rotateY(45deg); }
+  .vid-panel.pos-right { transform: translateX(55%) translateZ(-80px) rotateY(-45deg); }
+
+   /* FIX: elimină min-width care cauza overflow-ul spre dreapta */
+  .about-video-3d {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* FIX: taie panourile 3D laterale care depășeau marginile */
+  .about {
+    overflow: hidden;
+  }
+}
+
+/* ========== VIDEO LIGHTBOX (Full Screen Alternativ) ========== */
+.video-lightbox {
+  display: none; /* Ascuns implicit */
+  position: fixed;
+  z-index: 10500; /* Peste tot pe site */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9); /* Fundal negru semi-transparent */
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.video-lightbox.active {
+  display: flex; /* Afișat când i se dă clasa active */
+}
+
+.video-lightbox video {
+  max-width: 95%;
+  max-height: 85vh; /* Ocupă maxim 85% din înălțimea ecranului */
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  outline: none;
+}
+
+.close-lightbox {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+  z-index: 10501;
+}
+
+.close-lightbox:hover {
+  color: var(--accent); /* Folosește culoarea roz de accent */
+}
 
 /* ========== Fin ========== */

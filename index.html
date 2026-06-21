@@ -13,13 +13,13 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<link rel="icon" type="image/png" href="https://nouveauconstructgroup.ro/logo/favicon.jpeg" sizes="512x512">
-<link rel="apple-touch-icon" href="https://nouveauconstructgroup.ro/logo/favicon.jpeg">
+<link rel="icon" type="image/png" href="https://nouveauconstructgroup.ro/logo/favicon.png" sizes="512x512">
+<link rel="apple-touch-icon" href="https://nouveauconstructgroup.ro/logo/favicon.png">
 
 <!-- Open Graph -->
 <meta property="og:title" content="Nouveau Construct Group">
 <meta property="og:description" content="Firme de construcții și renovări din Oradea, specializate în finisaje interioare și exterioare.">
-<meta property="og:image" content="https://nouveauconstructgroup.ro/logo/favicon.jpeg">
+<meta property="og:image" content="https://nouveauconstructgroup.ro/logo/favicon.png">
 <meta property="og:url" content="https://nouveauconstructgroup.ro">
 <meta property="og:type" content="website">
 
@@ -57,9 +57,9 @@
       <p>Transformăm ideile tale în realitate! </p>
 
       <div class="hero-logo">
-        <img src="logo/logoncj-r.png" alt="Logo partener 1">
+        <img src="logo/logo ncj.png" alt="Logo partener 1">
         <img src="logo/logonct.jpg" alt="Logo partener 2">
-        <img src="logo/logosuprema.png" alt="Logo partener 3">
+        <img src="logo/ncg.jpeg" alt="Logo partener 3">
       </div>
       
       <a href="oferte.html" class="btn-oferta">Vezi ofertele noastre</a>
@@ -95,6 +95,9 @@
             <div class="vid-panel pos-right" data-index="1" onclick="handlePanelClick(1)">
               <video src="Video/Video  2.mp4" autoplay loop muted playsinline></video>
             </div>
+            <div class="vid-panel pos-hidden" data-index="3" onclick="handlePanelClick(3)">
+              <video src="Video/Video  4.mp4" autoplay loop muted playsinline></video>
+            </div>
           </div>
         </div>
 
@@ -102,6 +105,7 @@
           <span class="dot active" onclick="moveCarousel(0)">1</span>
           <span class="dot" onclick="moveCarousel(1)">2</span>
           <span class="dot" onclick="moveCarousel(2)">3</span>
+          <span class="dot" onclick="moveCarousel(3)">4</span>
         </div>
 
         <div id="video-lightbox-overlay" class="video-lightbox">
@@ -202,17 +206,30 @@
         </div>
 
         <div class="contact-item social">
-          <a href="https://www.facebook.com/share/1AKDUCA4PZ/?mibextid=wwXIfr" target="_blank" class="social-icon facebook">
-            <i class="fab fa-facebook-f"></i>
+          <a href="https://www.facebook.com/share/1AKDUCA4PZ/?mibextid=wwXIfr" target="_blank" class="social-link">
+            <span class="social-icon facebook">
+              <i class="fab fa-facebook-f"></i>
+            </span>
+            <span><strong>Facebook</strong></span>
           </a>
-          <span><strong>Facebook</strong></span>
         </div>
 
         <div class="contact-item social">
-          <a href="https://www.instagram.com/nouveau_construct_group?igsh=MWJveGw3aTRpY2NrdQ%3D%3D&utm_source=qr" target="_blank" class="social-icon instagram">
-            <i class="fab fa-instagram"></i>
+          <a href="https://www.instagram.com/nouveau_construct_group?igsh=MWJveGw3aTRpY2NrdQ%3D%3D&utm_source=qr" target="_blank" class="social-link">
+            <span class="social-icon instagram">
+              <i class="fab fa-instagram"></i>
+            </span>
+            <span><strong>Instagram</strong></span>
           </a>
-          <span><strong>Instagram</strong></span>
+        </div>
+
+        <div class="contact-item social">
+          <a href="https://www.tiktok.com/@nouveau.construct?_r=1&_t=ZN-97g78TKoL0o" target="_blank" class="social-link">
+            <span class="social-icon tiktok">
+              <i class="fab fa-tiktok"></i>
+            </span>
+            <span><strong>TikTok</strong></span>
+          </a>
         </div>
 
       </div>
@@ -282,27 +299,37 @@
   }
 
   // --- ROTIRE CARUSEL ---
-  function moveCarousel(videoIndex) {
-    if (currentCenter === videoIndex) return;
+ const TOTAL_VIDEOS = 4; // ← schimbă de la 3 la 4
 
-    const dots = document.querySelectorAll('.carousel-dots .dot');
-    const leftVideoIndex  = (videoIndex === 0) ? 2 : videoIndex - 1;
-    const rightVideoIndex = (videoIndex === 2) ? 0 : videoIndex + 1;
+function moveCarousel(videoIndex) {
+  if (currentCenter === videoIndex) return;
 
-    document.querySelectorAll('.vid-panel').forEach(p =>
-      p.classList.remove('pos-center', 'pos-left', 'pos-right')
-    );
+  const dots = document.querySelectorAll('.carousel-dots .dot');
 
-    getPanelByVideoIndex(videoIndex).classList.add('pos-center');
-    getPanelByVideoIndex(leftVideoIndex).classList.add('pos-left');
-    getPanelByVideoIndex(rightVideoIndex).classList.add('pos-right');
+  // Calculează automat stânga, dreapta și cel ascuns
+  const leftVideoIndex   = (videoIndex - 1 + TOTAL_VIDEOS) % TOTAL_VIDEOS;
+  const rightVideoIndex  = (videoIndex + 1) % TOTAL_VIDEOS;
+  const hiddenVideoIndex = [0, 1, 2, 3].find(
+    i => i !== videoIndex && i !== leftVideoIndex && i !== rightVideoIndex
+  );
 
-    dots.forEach(d => d.classList.remove('active'));
-    dots[videoIndex].classList.add('active');
+  // Resetează toate pozițiile
+  document.querySelectorAll('.vid-panel').forEach(p =>
+    p.classList.remove('pos-center', 'pos-left', 'pos-right', 'pos-hidden')
+  );
 
-    currentCenter = videoIndex;
-    updateAudioState();
-  }
+  // Aplică noile poziții
+  getPanelByVideoIndex(videoIndex).classList.add('pos-center');
+  getPanelByVideoIndex(leftVideoIndex).classList.add('pos-left');
+  getPanelByVideoIndex(rightVideoIndex).classList.add('pos-right');
+  getPanelByVideoIndex(hiddenVideoIndex).classList.add('pos-hidden');
+
+  dots.forEach(d => d.classList.remove('active'));
+  dots[videoIndex].classList.add('active');
+
+  currentCenter = videoIndex;
+  updateAudioState();
+}
 
   // --- CLICK PE PANOU ---
   function handlePanelClick(videoIndex) {
